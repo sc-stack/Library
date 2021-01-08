@@ -1,8 +1,13 @@
+:root{
+    width: 1000px;
+    height: 1000px;
+    background : orange;
+}
 h1{
     text-align: center;
 }
 .card{
-    width: 100px;
     height: 100px;
     background: blue;
+    color: orange;
 }
