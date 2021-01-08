@@ -1,0 +1,1 @@
+A project underlining the fundamentals of programming with objects. Data will be stored either locally or on the cloud. 
