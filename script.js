@@ -33,7 +33,7 @@ function displayBook(){
         tr.appendChild(td2);
         console.log("hi again");
         const title = book.title;
-        td3.innerHTML = author;
+        td3.innerHTML = title;
         tr.appendChild(td3);
         const read = book.isRead(); 
         td4.innerHTML = read;
