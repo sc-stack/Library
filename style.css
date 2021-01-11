@@ -21,3 +21,7 @@ table, th, td, tr{
 td{
     width: 100px;
 }
+#btn{
+    display: block;
+    margin-left: auto
+}
