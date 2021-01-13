@@ -1,15 +1,12 @@
 :root{
-    width: 1000px;
-    height: 1000px;
-    background : orange;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8bGlicmFyeXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
 }
 h1{
+    font-family: Brush Script MT, Brush Script Std, cursive;
+    color: lightblue;
     text-align: center;
-}
-.card{
-    height: 100px;
-    background: blue;
-    color: orange;
 }
 #table{
     margin-left: auto;
@@ -17,6 +14,9 @@ h1{
 }
 table, th, td, tr{
     border: 1px solid black;
+    background: lightblue;
+    opacity: 1;
+    color: black;
 }
 td{
     width: 100px;
@@ -24,4 +24,16 @@ td{
 #btn{
     display: block;
     margin-left: auto
+}
+.remove{
+    display: hidden;
+}
+#form{
+    visibility: hidden;
+}
+#add{
+    border-radius: 50%;
+    background: lightblue;
+    color: white;
+    margin-right: auto;
 }

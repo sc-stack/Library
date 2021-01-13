@@ -2,8 +2,9 @@ let myLibrary = [];
 const submit = document.getElementById("btn");
 const container = document.getElementById("table");
 const div = document.getElementById('container');
+const addButton = document.getElementById("add");
+const form = document.getElementById('form');
 const rowRemoveButton = document.createElement('button');
-rowRemoveButton.setAttribute('id', 'btn');
 //creates a book object
 function Book(pages, author, title, read, btn){
     this.pages = pages;
@@ -51,6 +52,10 @@ function getRadioValue(theRadioGroup)
         }
     }
 }
+//addButton
+addButton.addEventListener('click', () => {
+    form.style.visibility = "visible";
+});
 //this needs to bring up a new form that allows users to input details for the book
 submit.addEventListener('click', () => {
     const pages = document.getElementById('pages').value;
@@ -59,6 +64,7 @@ submit.addEventListener('click', () => {
     const book = new Book(pages, author, title, getRadioValue('read'), rowRemoveButton);
     addBookToLibrary(book);
     displayBook();
+    form.style.visibility = 'hidden';
 });
 //button that removes the book from its specified row
 rowRemoveButton.addEventListener('click', removeRow(rowRemoveButton.parentNode.getAttribute('data-index-number')));
