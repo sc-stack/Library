@@ -13,6 +13,14 @@ function Book(pages, author, title, read, btn){
     this.read = read;
     this.btn = btn;
 }
+Book.prototype.changeRead = function(td){
+    const changeReadBtn = document.createElement('button');
+    changeReadBtn.setAttribute('type', 'button');
+    changeReadBtn.addEventListener('click', () => {
+        this.read  = !this.read;
+    });
+    td.appendChild(changeReadBtn);
+}
 //appends a book to the end of the library
 function addBookToLibrary(book){
     myLibrary.push(book);
@@ -33,9 +41,14 @@ function displayBook(){
                     if(myLibrary.length == 0) cur = 1;
                     reassignDataAttributes();
                 });
+                break;
             }else{
                 const td = document.createElement('td');
                 td.innerHTML = book[key];
+                if(i == 3){
+                    book.changeRead(td);
+                    td.innerHTML = book[key];
+                }
                 tr.appendChild(td);
                 i++;
             }
@@ -50,7 +63,6 @@ function reassignDataAttributes(){
         if(myLibrary.length != 0){ 
         let tr = trs[i];
         tr.setAttribute('data-index-number', i);
-        console.log(i);
         }
     }
 }
@@ -62,7 +74,6 @@ function removeRow(dataIndexValue){
         if(tr.getAttribute('data-index-number') == parseInt(dataIndexValue)){
             container.deleteRow(parseInt(dataIndexValue));
             myLibrary.splice(dataIndexValue-1,1);
-            console.log(myLibrary);
         }
     }
     return;
@@ -100,6 +111,4 @@ submit.addEventListener('click', () => {
     form.style.visibility = 'hidden';
     //button that removes the book from its specified row
 });
-submit.addEventListener('click', function(e){
 
-});
