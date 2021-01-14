@@ -30,6 +30,7 @@ function displayBook(){
                 tr.appendChild(td);
                 book[key].addEventListener('click', () => {
                     removeRow(parseInt(book[key].parentNode.parentNode.getAttribute('data-index-number')));
+                    if(myLibrary.length == 0) cur = 1;
                     reassignDataAttributes();
                 });
             }else{
@@ -46,8 +47,11 @@ function displayBook(){
 function reassignDataAttributes(){
     const trs = document.querySelectorAll('tr');
     for(let i = 1;i < trs.length ; i++){
+        if(myLibrary.length != 0){ 
         let tr = trs[i];
         tr.setAttribute('data-index-number', i);
+        console.log(i);
+        }
     }
 }
 //removes the specific row from a table
@@ -57,6 +61,8 @@ function removeRow(dataIndexValue){
         const tr = trs[i];
         if(tr.getAttribute('data-index-number') == parseInt(dataIndexValue)){
             container.deleteRow(parseInt(dataIndexValue));
+            myLibrary.splice(dataIndexValue-1,1);
+            console.log(myLibrary);
         }
     }
     return;
@@ -94,4 +100,6 @@ submit.addEventListener('click', () => {
     form.style.visibility = 'hidden';
     //button that removes the book from its specified row
 });
- 
+submit.addEventListener('click', function(e){
+
+});

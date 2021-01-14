@@ -32,22 +32,26 @@ td{
 }
 #form{
     background: lightblue;
-    visibility: visible;
-    margin: auto;
+    visibility: hidden;
+    right: 37vw;
+    top: 30vh;
     width: 25%;
     height: 50%;
     border-radius: 10px;
     border: 5px solid blue;
-    
+    position: fixed;
 }
 #add{
     border-radius: 50%;
     background: lightblue;
     color: white;
-    margin-right: auto;
+    position: fixed;
+    right: 75px;
+    top: 75px;
 }
 #remove{
     background: lightblue;
-    color: white;
+    color: peachpuff;
     width: 100%;
+    border-radius: 50%;
 }

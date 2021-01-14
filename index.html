@@ -21,7 +21,7 @@
         <br>
         <br>
         <div id = "container">
-            <form id = 'form'>
+            <form onsubmit = 'return false' id = 'form'>
                 <label for = 'pages'>Pages:<span></span></label>
                     <input type = 'text' id = 'pages' name = 'pages' required>
                     <br>
@@ -37,7 +37,7 @@
                 <label for = 'read'>False:</label>
                     <input type = 'radio' id = 'read' name = 'read' value = "False" required>
                     <br>
-                <button type = 'button' id= 'btn'>Submit</button>
+                <button type = 'submit' id= 'btn'>Submit</button>
             </form>
         </div>
         <button id = 'add'>+</button>
