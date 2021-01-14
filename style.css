@@ -7,8 +7,10 @@ h1{
     font-family: Brush Script MT, Brush Script Std, cursive;
     color: lightblue;
     text-align: center;
+    font-size: 4rem;
 }
 #table{
+    visibility: hidden;
     margin-left: auto;
     margin-right: auto;
 }
@@ -29,11 +31,23 @@ td{
     display: hidden;
 }
 #form{
-    visibility: hidden;
+    background: lightblue;
+    visibility: visible;
+    margin: auto;
+    width: 25%;
+    height: 50%;
+    border-radius: 10px;
+    border: 5px solid blue;
+    
 }
 #add{
     border-radius: 50%;
     background: lightblue;
     color: white;
     margin-right: auto;
+}
+#remove{
+    background: lightblue;
+    color: white;
+    width: 100%;
 }
