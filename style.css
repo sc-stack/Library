@@ -55,3 +55,13 @@ td{
     width: 100%;
     border-radius: 50%;
 }
+#change{
+    visibility: visible;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    width: 25px;
+    height: 25px;
+    position: relative;
+    right:-25px;
+}
