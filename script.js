@@ -7,17 +7,13 @@ const addButton = document.getElementById("add");
 const form = document.getElementById('form');
 const readDiv = document.createElement('div');
 readDiv.setAttribute('id', 'read');
-if(!localStorage.getItem('pages')) {
-    populateStorage();
-  } else {
-    setStyles();
-  }
 //creates a book object
-function Book(pages, author, title, read, btn){
+function Book(pages, author, title, read , toggleRead , btn){
     this.pages = pages;
     this.author = author;
     this.title = title;
     this.read = read;
+    this.toggleRead = toggleRead;
     this.btn = btn;
 }
 Book.prototype.changeRead = function(){
@@ -34,7 +30,7 @@ function displayBook(){
         tr.setAttribute('data-index-number', "" + cur);
         let i = 0;
         for(let key in book){
-            if(i == 4){
+            if(i == 5){
                 const td = document.createElement('td');
                 td.appendChild(book[key]);
                 tr.appendChild(td);
@@ -47,12 +43,22 @@ function displayBook(){
                     reassignDataAttributes();
                 });
                 break;
+            }else if(i == 4){
+                const td = document.createElement('td');
+                td.appendChild(book[key]);
+                tr.appendChild(td);
+                book[key].addEventListener('click', () => {
+                    const readTd = getTd(book.read.toString());
+                    book.changeRead();                    
+                    readTd.innerHTML = book.read;
+             });
+           console.log('pain');
             }else{
                 const td = document.createElement('td');
-                td.innerHTML = book[key];
+                td.innerHTML = book[key].toString();
                 tr.appendChild(td);
-                i++;
             }
+            ++i;
         }
         cur++;
         container.appendChild(tr);
@@ -79,6 +85,17 @@ function getTr(val){
     }
     return;
 }
+//finds a button with specfici text
+function getButton(val){
+    const buttons = document.querySelectorAll('buttons');
+    for(let i = 0; i < buttons.length; i++){
+        const button = buttons[i];
+        if(button.innerHTML == val){
+            return button;
+        }
+    }
+    return;
+}
 //reassigns all the data attributes once a row has been deleted from the table
 function reassignDataAttributes(){
     const trs = document.querySelectorAll('tr');
@@ -90,14 +107,18 @@ function reassignDataAttributes(){
     }
 }
 //saves entire library to local storage every time a book is created
-function saveToLocal(){
+function saveToLocal(book, button){
     //creates an instance of the storage object allowing manipulation of data items
-            if(!localStorage.getItem('pages')){
-                populateStorage();
+        for(let i = 0 ;i < myLibrary.length; i++){ 
+            let book = myLibrary[i];
+            if(!localStorage.getItem('book')){
+                populateStorage(book, button);
+                console.log("populate storage");
             } else {
-                setStyles();
+                if(getTd(button) === undefined) setStyles();
+                console.log('set styles');
             }
-    
+        }
 }
 function setStyles(){
     //grab values from local storage
@@ -105,29 +126,36 @@ function setStyles(){
     let currentAuthor = localStorage.getItem('author');
     let currentTitle = localStorage.getItem('title');
     let isRead = localStorage.getItem('read');
-    let removeButton = localStorage.getItem('btn');
+    let removeButtonText = localStorage.getItem('btn');
     //set values to keep in sync when page reloads
     document.getElementById('pages').value = currentAmtOfPages;
     document.getElementById('author').value = currentAuthor;
     document.getElementById('title').value = currentTitle;
     document.getElementById('read').value = isRead;
-  //  document.getElementById('removeButton').value = removeButton;
+    removeButton.setAttribute('id', 'removeButton');
     //sets the display everytime a screen is loaded
     const tr = document.createElement('tr');
     let arr = [document.getElementById('pages').value, document.getElementById('author').value, document.getElementById('title').value, document.getElementById('read').value];
-    for(let i = 0 ;i < 4; i++){
-        const td = getTd(arr[i]);
+    for(let i = 0 ;i <= 4; i++){
+        if(i != 4){ 
+        const td = document.createElement('td');
         td.innerHTML = arr[i];
+        tr.appendChild(td);
+        }
+        const td = document.createElement('td');
+        td.appendChild(removeButton);
         tr.appendChild(td);
     }
     container.appendChild(tr);
 }
-function populateStorage() {
+function populateStorage(book, button) {
+    localStorage.setItem('book', book);
     localStorage.setItem('pages', document.getElementById('pages').value);
     localStorage.setItem('author', document.getElementById('author').value);
     localStorage.setItem('title', document.getElementById('title').value);
     localStorage.setItem('read', document.getElementById('read').value);
-
+    localStorage.setItem('btn', button.innerHTML);
+  //  localStorage.setItem('btn', button);
 
    // setStyles();
   }
@@ -200,24 +228,20 @@ submit.addEventListener('click', () => {
     rowRemoveButton.setAttribute('type', 'button');
     rowRemoveButton.innerHTML = "Remove Book"
     rowRemoveButton.setAttribute('id', 'remove');
+    const changeReadBtn = document.createElement('button');
+    changeReadBtn.setAttribute('type', 'button');
+    changeReadBtn.setAttribute('id', 'change');
     const pages = document.getElementById('pages').value;
     const author = document.getElementById('author').value;
     const title = document.getElementById('title').value;
     readDiv.innerHTML = getRadioValue('read');
-    const read = document.getElementById('read').value;
-    const book = new Book(pages, author, title, read, rowRemoveButton);
+    const book = new Book(pages, author, title, getRadioValue('read'),changeReadBtn, rowRemoveButton);
     addBookToLibrary(book);
+ //   if(storageAvailable('localStorage') ){     
+  //      saveToLocal(book, rowRemoveButton);
+   // }
     displayBook();
     container.style.visibility = 'visible';
     form.style.visibility = 'hidden';
-   // const td = getTd(getRadioValue('read'));
-   // const changeReadBtn = document.createElement('input');
-  //  changeReadBtn.setAttribute('type', 'button');
-  // changeReadBtn.setAttribute('id', 'change');
-    //    changeReadBtn.addEventListener('click', () => {
-    //        book.changeRead();
-    //        td.innerHTML = book.read;
-    //    });
-    //td.appendChild(changeReadBtn);
 });
 
